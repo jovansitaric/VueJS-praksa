@@ -28,10 +28,12 @@ export default {
     mounted () {
       if (localStorage.getItem('access_token')) {
         console.log("Token in use");
+      
       } 
       else {
         console.log("sign in");
         this.$router.push({ name: '/' })
+        
       }
     }
 }
