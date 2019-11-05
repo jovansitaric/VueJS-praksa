@@ -12,6 +12,11 @@
         <button type="submit" class="button is-outlined is-primary">Submit</button>
 
         </form>
+
+        <div id="test">
+            {{token}}
+        </div>
+
     </div>
 </template>
 
@@ -24,21 +29,28 @@ export default {
     data () {
         return {
             email: '',
-            password: ''
+            password: '',            
+            token: null
         }
     },
-    mounted () {
-        axios.post("http://praksa.test/api/login", {
-            email: this.email,
-            password: this.email,
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });    
-        
+    methods: {
+        login () {
+            const t = this
+            axios.post("http://praksa.test/api/login", {
+                email: this.email,
+                password: this.password,
+                // email: 'example@example.com',
+                // password: 'password1234',
+            })
+            .then(function (response) {
+                console.log(response.data.success.token);
+                window.localStorage.setItem('access_token', response.data.success.token);
+                t.$router.push({ name: 'userHome' })
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
     }
 }
 </script>
