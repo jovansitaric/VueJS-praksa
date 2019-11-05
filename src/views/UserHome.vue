@@ -24,12 +24,23 @@
 
 <script>
 export default {
-    name: 'UserHome'
+    name: 'UserHome',
+    mounted () {
+      if (localStorage.getItem('access_token')) {
+        console.log("Token in use");
+      } 
+      else {
+        console.log("sign in");
+        this.$router.push({ name: '/' })
+      }
+    }
 }
+
 </script>
 
 <style>
   .card {
-    width: 50%;
+    width: 20%;
+    margin: 0 auto;
   }
 </style>

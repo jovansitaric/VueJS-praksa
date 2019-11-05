@@ -29,8 +29,7 @@ export default {
     data () {
         return {
             email: '',
-            password: '',            
-            token: null
+            password: ''
         }
     },
     methods: {
@@ -46,6 +45,7 @@ export default {
                 console.log(response.data.success.token);
                 window.localStorage.setItem('access_token', response.data.success.token);
                 t.$router.push({ name: 'userHome' })
+                
             })
             .catch(function (error) {
                 console.log(error);
