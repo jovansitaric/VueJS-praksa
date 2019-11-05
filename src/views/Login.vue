@@ -13,10 +13,6 @@
 
         </form>
 
-        <div id="test">
-            {{token}}
-        </div>
-
     </div>
 </template>
 

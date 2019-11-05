@@ -8,7 +8,7 @@
     <div class="card-content">
       <div class="media">
         <div class="media-content">
-          <p class="title is-4">Joe Doe</p>
+          <h3 class="title is-4">Joe Doe</h3>
           <p class="subtitle is-6">@joedoe</p>
         </div>
       </div>
@@ -23,17 +23,33 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
     name: 'UserHome',
     mounted () {
       if (localStorage.getItem('access_token')) {
         console.log("Token in use");
-      
+        this.getUserData();
       } 
       else {
         console.log("sign in");
         this.$router.push({ name: '/' })
-        
+      }
+    },    
+    data () {
+      return {
+        getTemp: []
+      }
+    },
+    methods: {
+      getUserData() {        
+        axios.get("http://praksa.test/api/tasks")
+             .then(res => {
+               this.getTemp = res.data
+               console.log(this.getTemp)
+             })
       }
     }
 }
