@@ -18,7 +18,7 @@
         Phasellus nec iaculis mauris.
         <br>
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -40,16 +40,22 @@ export default {
     },    
     data () {
       return {
-        getTemp: []
+        tasks: []
       }
     },
     methods: {
-      getUserData() {        
+      getUserData() {
+        const t = this        
         axios.get("http://praksa.test/api/tasks")
-             .then(res => {
-               this.getTemp = res.data
-               console.log(this.getTemp)
+             .then(function (res) {
+               t.tasks = res.data.id
+              //  console.log(this.getTemp)
+               console.log(res)
+               console.log(t.tasks)
              })
+             .catch((e) => {
+                console.error(e)
+              })
       }
     }
 }
