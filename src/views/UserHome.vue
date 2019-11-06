@@ -19,10 +19,10 @@
         <li :key="task.id" v-for="task in model.user.tasks">
           {{task.id}} . {{ task.title }} - {{task.created_at}}
           <span id="update-task">
-            <button class="button is-info">Edit</button>
+            <button @click="updateTask(task.id)" class="button is-info">Edit</button>
           </span>
           <span id="delete-task">
-            <button class="button is-danger">Delete</button>
+            <button @click="deleteTask(task.id)" class="button is-danger">Delete</button>
           </span>
           <br />
           <br />
@@ -83,10 +83,26 @@ export default {
       //      })
     },
     createNewTask() {
-      this.$router.push({name: 'createTask'})
+      this.$router.push({ name: "createTask" });
     },
-    updateTask() {},
-    deleteTask() {}
+    updateTask(taskId) {
+      this.$router.push({ name: "updateTask", params: { id: taskId } });
+      console.log(taskId);
+    },
+    deleteTask(taskId) {
+      const access_token = localStorage.getItem("access_token");
+      axios({
+        method: "delete",
+        url: `http://praksa.test/api/tasks/${taskId}`,
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + access_token
+        }
+      }).then(res=>{
+          this.$router.push({ name: 'userHome'})
+          console.log(res)
+      });
+    }
   }
 };
 </script>
