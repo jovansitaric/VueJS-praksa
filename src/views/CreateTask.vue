@@ -46,7 +46,7 @@ export default {
         }
       }).then(res => {
           this.$router.push({ name: 'userHome' })
-          console.log(res)  
+          console.log(res)
       })
     }
   }
