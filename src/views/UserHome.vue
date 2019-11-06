@@ -8,8 +8,9 @@
     <div class="card-content">
       <div class="media">
         <div class="media-content">
-          <h3 class="title is-4">Joe Doe</h3>
-          <p class="subtitle is-6">@joedoe</p>
+          <h3 class="title is-4">{{model.user.name}}
+          </h3>
+          <p class="subtitle is-6">{{model.user.email}}</p>
         </div>
       </div>
 
@@ -44,8 +45,7 @@ export default {
   },
   data() {
     return {
-      title: "",
-      description: ""
+      model: {}
     };
   },
   methods: {
@@ -60,11 +60,7 @@ export default {
           Authorization: "Bearer " + access_token
         }
       }).then(res => {
-        this.title = res.data.data.title
-        this.description = res.data.data.description
-        console.log(res)
-        console.log(this.title)
-        console.log(access_token)
+        this.model = res.data
       });
       // axios.get("http://praksa.test/api/tasks")
       //      .then(function (res) {

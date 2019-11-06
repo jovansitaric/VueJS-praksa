@@ -25,7 +25,8 @@ export default {
     data () {
         return {
             email: '',
-            password: ''
+            password: '',
+            id: ''
         }
     },
     methods: {
@@ -33,15 +34,14 @@ export default {
             const t = this
             axios.post("http://praksa.test/api/login", {
                 email: this.email,
-                password: this.password,
+                password: this.password
                 // email: 'example@example.com',
                 // password: 'password1234',
             })
             .then(function (response) {
                 console.log(response.data.success.token);
                 window.localStorage.setItem('access_token', response.data.success.token);
-                t.$router.push({ name: 'userHome' })
-                
+                t.$router.push({ name: 'userHome' })                
             })
             .catch(function (error) {
                 console.log(error);
