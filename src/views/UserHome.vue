@@ -8,21 +8,30 @@
     <div class="card-content">
       <div class="media">
         <div class="media-content">
-          <h3 class="title is-4">{{model.user.name}}
-          </h3>
+          <h3 class="title is-4">{{model.user.name}}</h3>
           <p class="subtitle is-6">{{model.user.email}}</p>
         </div>
       </div>
+    </div>
+    <br />
+    <div class="tasks">
+      <ul>
+        <li :key="task.id" v-for="task in model.user.tasks">
+          {{task.id}} . {{ task.title }} - {{task.created_at}}
+          <span id="update-task">
+            <button class="button is-info">Edit</button>
+          </span>
+          <span id="delete-task">
+            <button class="button is-danger">Delete</button>
+          </span>
+          <br />
+          <br />
+        </li>
+      </ul>
 
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Phasellus nec iaculis mauris.
-        <br />
-      </div>
-      <div id="test">
-          {{title}}
-          {{description}}
-      </div>
+      <button @click="createNewTask()" class="button is-success">Create new task</button>
+      <br />
+      <br />
     </div>
   </div>
 </template>
@@ -60,7 +69,7 @@ export default {
           Authorization: "Bearer " + access_token
         }
       }).then(res => {
-        this.model = res.data
+        this.model = res.data;
       });
       // axios.get("http://praksa.test/api/tasks")
       //      .then(function (res) {
@@ -72,14 +81,19 @@ export default {
       //      .catch((e) => {
       //         console.error(e)
       //      })
-    }
+    },
+    createNewTask() {
+      this.$router.push({name: 'createTask'})
+    },
+    updateTask() {},
+    deleteTask() {}
   }
 };
 </script>
 
 <style>
 .card {
-  width: 20%;
+  width: 30%;
   margin: 0 auto;
 }
 </style>

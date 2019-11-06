@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import UserHome from '../views/UserHome.vue'
+import CreateTask from '../views/CreateTask.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/userHome',
     name: 'userHome',
     component: UserHome
+  },
+  {
+    path: '/createTask',
+    name: 'createTask',
+    component: CreateTask
   },
   {
     path: '/about',
