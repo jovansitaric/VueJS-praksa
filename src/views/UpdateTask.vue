@@ -36,7 +36,7 @@ export default {
   methods: {
     updateTask() {
       let taskId = this.$route.params.id;
-      const URL = `http://praksa.test/api/${taskId}`;
+      const URL = `http://praksa.test/api/tasks/${taskId}`;
       const access_token = localStorage.getItem("access_token");
       axios({
         method: "put",
@@ -45,7 +45,7 @@ export default {
           Authorization: "Bearer " + access_token
         },
         data: {
-          user_id: "",
+          user_id: this.taskId,
           title: this.title,
           description: this.description
         }
