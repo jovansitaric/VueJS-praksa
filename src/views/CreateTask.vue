@@ -5,7 +5,13 @@
       <br />
       <br />
 
-      <input v-model="description" required name="description" type="text" placeholder="enter description" />
+      <input
+        v-model="description"
+        required
+        name="description"
+        type="text"
+        placeholder="enter description"
+      />
       <br />
       <br />
 
@@ -40,14 +46,14 @@ export default {
           Authorization: "Bearer " + access_token
         },
         data: {
-          user_id: '',
+          user_id: "",
           title: this.title,
           description: this.description
         }
       }).then(res => {
-          this.$router.push({ name: 'userHome' })
-          console.log(res)
-      })
+        this.$router.push({ name: "userHome" });
+        console.log(res);
+      });
     }
   }
 };

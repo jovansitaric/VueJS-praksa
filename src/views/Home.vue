@@ -1,8 +1,8 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <a href="http://localhost:8080/login"><h1>Login</h1></a>
-    <a href="http://localhost:8080/login"><h1>Register</h1></a>
+    <img alt="Vue logo" src="../assets/logo.png"> <br><br>
+    <a href="http://localhost:8080/login"><button class="button is-success is-medium">Login</button></a>
+    <!-- <a href="http://localhost:8080/login"><h1>Register</h1></a> -->
     <h3>{{name}}</h3>
     <p>{{desc}}</p>
   </div>

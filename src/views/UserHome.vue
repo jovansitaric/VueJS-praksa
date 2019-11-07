@@ -13,19 +13,21 @@
         </div>
       </div>
     </div>
-    <br />
+    <br />    
     <div class="tasks">
       <ul>
         <li :key="task.id" v-for="task in model.user.tasks">
-          {{task.id}} . {{ task.title }} - {{task.created_at}}
-          <span id="update-task">
-            <button @click="updateTask(task.id)" class="button is-info">Edit</button>
-          </span>
-          <span id="delete-task">
-            <button @click="deleteTask(task.id)" class="button is-danger">Delete</button>
-          </span>
+          {{task.id}} . {{ task.title }} - {{task.created_at}} <br>
+          <div>
+            <span id="update-task">
+                <button @click="updateTask(task.id, task.title, task.description)" class="button is-info">Edit</button>
+            </span>
+            <span id="delete-task">
+                <button @click="deleteTask(task.id)" class="button is-danger">Delete</button>
+            </span>
           <br />
           <br />
+          </div>          
         </li>
       </ul>
 
@@ -85,8 +87,8 @@ export default {
     createNewTask() {
       this.$router.push({ name: "createTask" });
     },
-    updateTask(taskId) {
-      this.$router.push({ name: "updateTask", params: { id: taskId } });
+    updateTask(taskId, title, description) {
+      this.$router.push({ name: "updateTask", params: { id: taskId, title: title, description: description} });
       console.log(taskId);
     },
     deleteTask(taskId) {
@@ -99,6 +101,7 @@ export default {
           Authorization: "Bearer " + access_token
         }
       }).then(res=>{
+          this.fetchUserDetails()
           this.$router.push({ name: 'userHome'})
           console.log(res)
       });
