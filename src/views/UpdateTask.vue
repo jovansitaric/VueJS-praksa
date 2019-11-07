@@ -39,10 +39,10 @@
     <br />
     <br />
     <div v-if="isClicked" id="create-task-div">
-      <input v-model="notes.description" type="text" placeholder="Insert note title" required />
+      <input v-model="notes.title" type="text" placeholder="Insert note title" required />
       <br />
       <br />
-      <input v-model="notes.title" type="text" placeholder="Insert note description" required />
+      <input v-model="notes.description" type="text" placeholder="Insert note description" required />
       <br />
       <br />
       <button @click="createNote" type="submit" class="button is-success">Create note</button>
@@ -67,7 +67,7 @@ export default {
         description: "New note description"
       },
       isClicked: false,
-      model: {}
+      model: []
     };
   },
 
@@ -87,8 +87,10 @@ export default {
           Authorization: "Bearer " + access_token
         },
         data: {
-          title: this.model.title,
-          description: this.model.description
+        //   title: this.model.title,
+        //   description: this.model.description
+        title: this.model.task.title,
+        description: this.model.task.description
         }
       }).then(res => {
         this.$router.push({ name: "userHome" });
