@@ -27,7 +27,7 @@
     </form>
     <div id="task-notes">
       <div class="note-looper" v-for="note in model.notes" :key="note.id">
-        <a @click="deleteNote" class="delete is-medium"></a>
+        <a @click="deleteNote(note.id)" class="delete is-medium"></a>
         <div class="title">{{note.title}}</div>
         <div class="content">
           {{note.description}}
@@ -87,9 +87,8 @@ export default {
           Authorization: "Bearer " + access_token
         },
         data: {
-          user_id: this.taskId,
-          title: this.title,
-          description: this.description
+          title: this.model.title,
+          description: this.model.description
         }
       }).then(res => {
         this.$router.push({ name: "userHome" });
@@ -113,11 +112,37 @@ export default {
       });
     },
     createNote() {
-      this.model.notes.push(this.notes);
+      let taskId = this.$route.params.id;
+      const URL = `http://praksa.test/api/tasks/${taskId}/notes`;
+      const access_token = localStorage.getItem("access_token");
+      axios({
+        method: "post",
+        url: URL,
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + access_token
+        },
+        data: {
+          title: this.notes.title,
+          description: this.notes.description
+        }
+      }).then(res => {
+        this.model.notes.push(res.data);
+      });
     },
-    deleteNote($id) {
-        // this.model.notes.filter();
-        console.log($id)
+    deleteNote(noteId) {
+      let taskId = this.$route.params.id;
+      const URL = `http://praksa.test/api/tasks/${taskId}/notes/${noteId}`;
+      const access_token = localStorage.getItem("access_token");
+      axios({
+        method: "delete",
+        url: URL,
+        headers: {
+          Authorization: "Bearer " + access_token
+        }
+      }).then(res => {
+        this.model.notes = res.data;
+      });
     }
   }
 };
